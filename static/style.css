@@ -1,0 +1,23 @@
+body {
+    font-family: "helvetica", sans-serif;
+    text-align: center;
+}
+
+div.event {
+    border: 1px solid #ad9595;
+    text-align: left;
+    padding: 10px 30px;
+}
+
+#addEvent {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    text-align: left;
+    color: burlywood;
+    padding: 30px 0px;
+}
+
+#addEvent h3 {
+    margin: 0px;
+}

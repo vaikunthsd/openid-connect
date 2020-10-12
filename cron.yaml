@@ -1,0 +1,7 @@
+cron:
+- description: "delete past events"
+  url: /tasks/delete_past_events
+  schedule: every 2 mins
+- description: "delete expired sessions"
+  url: /tasks/delete_expired_sessions
+  schedule: every 2 mins

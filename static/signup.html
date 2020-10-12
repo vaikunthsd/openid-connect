@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <style type="text/css">
+        body {
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: "helvetica", sans-serif;
+        text-align: center;
+    }
+
+    .container {
+        width: 20%;
+        min-width: 400px;
+    }
+    .container>h2{
+        margin: 10px 0px;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        box-sizing: border-box;
+    }
+
+    h4.label {
+        text-align: left;
+        margin: 10px 0px;
+    }
+    input[type="button"]{
+        margin: 10px 0px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Signup</h2>
+        <form>
+            <h4 class="label">Username</h4>
+            <input placeholder="username" type="text" name="username">
+            <h4 class="label">Password</h4>
+            <input placeholder="password" type="password" name="password">
+            <h4 class="label">Re enter Password</h4>
+            <input placeholder="Re enter password" type="password" name="reenter_password">
+            <div style="display: flex;align-items: flex-end;">
+                <input type="button" id="signupBtn" value="Sign up" style="min-width: 200px;cursor: pointer;margin-bottom: 0px;background-color: blanchedalmond;border: 1px solid #cebebe;padding: 6px;height: 60%;">
+                </div>
+        </form>
+    </div>
+<script type="text/javascript">
+    function reqJSON(method, path, data) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open(method, path, true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.responseType = 'json';
+
+            function resp() {
+                return {
+                    status: xhr.status,
+                    statusText: xhr.statusText,
+                    data: xhr.response,
+                }
+            }
+            xhr.onload = () => {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(resp());
+                } else {
+                    console.error('xhr with error:', xhr);
+                    reject(resp());
+                }
+            }
+            xhr.onerror = () => {
+                console.error('xhr with error:', xhr);
+                reject(resp());
+            }
+            xhr.send(JSON.stringify(data));
+        })
+    }
+    window.addEventListener('load', function() {
+        let loginBtn = document.getElementById('signupBtn'),
+            usernameElem = document.querySelector('input[name="username"]'),
+            passwordElem = document.querySelector('input[name="password"]'),
+            reEnterPasswordElem = document.querySelector('input[name="reenter_password"]');
+        loginBtn.addEventListener("click", function() {
+            if(passwordElem.value != reEnterPasswordElem.value){
+                alert('Password should match!!');
+                return;
+            }
+            let username = usernameElem.value,
+                password = passwordElem.value;
+            reqJSON('POST', '/signup', {
+                username: username,
+                password: password
+            }).then((response) => {
+                console.log(response)
+                alert(response.data.data);
+                window.location.href = '/';
+            }).catch((error) => {
+                console.log(error)
+                alert(error.data.data);
+            })
+        });
+    });
+</script>
+</body>
+</html>

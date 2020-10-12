@@ -1,0 +1,5 @@
+indexes:
+- kind: event
+  ancestor: yes
+  properties:
+  - name: time

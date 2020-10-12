@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>AppEngine Standard App</title>
+    <script src="/static/script.js?ver=6.0"></script>
+    <link type="text/css" rel="stylesheet" href="/static/style.css?ver=4.0">
+</head>
+
+<body>
+    <h3>Birthday Event Reminder Form</h3>
+    <form id="addEvent">
+        <div>
+            <h3>Name:</h3><input placeholder="event name" type="text" name="event_name"></input>
+        </div>
+        <div>
+            <h3>Date (YYYY-MM-DD):</h3>
+            <input placeholder="event year" type="number" name="event_year"><span> - </span>
+            <input placeholder="event month" type="number" name="event_month"><span> - </span>
+            <input placeholder="event day" type="number" name="event_day">
+        </div>
+        <div>
+            <h3>Time (HH:MM:SS XM):</h3><input type="time" name="event_time" step="2">
+        </div>
+        <div style="display: flex;align-items: flex-end;">
+            <input type="button" onclick="addEvent()" value="Add event" style="min-width: 200px;cursor: pointer;margin-bottom: 0px;background-color: blanchedalmond;border: 1px solid #cebebe;padding: 6px;height: 60%;">
+        </div>
+    </form>
+    <div>
+        <div style="display: flex;justify-content: space-between;align-items: center;">
+            <h1 style="text-align: left;color: burlywood;">Events list:</h1>
+            <a href="/logout" style="min-width: 20%;text-decoration: none;">
+                <input type="button" value="Logout" style="min-width: 200px;cursor: pointer;margin-bottom: 0px;background-color: blanchedalmond;border: 1px solid #cebebe;padding: 6px;position: fixed;top: 10px;right: 50px;height: auto;">
+            </a>
+        </div>
+
+        <div id="events_list"></div>
+    </div>
+</body>
+
+</html>
